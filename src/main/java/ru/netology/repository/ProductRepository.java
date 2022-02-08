@@ -21,7 +21,8 @@ public class ProductRepository {
     public Product[] findAll() {
         return items;
     }
-     //удаление по id
+
+    //удаление по id
     public void removeById(int id) {
         int length = items.length-1;
         Product[] tmp = new Product[length];
