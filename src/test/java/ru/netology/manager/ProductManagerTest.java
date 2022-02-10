@@ -24,10 +24,9 @@ class ProductManagerTest {
     private Smartphone eighth = new Smartphone(8, "Redmi K40", 16000, "Xiaomi");
     private Smartphone ninth = new Smartphone(9, "Galaxy S20", 30000, "Samsung");
     private Smartphone tenth = new Smartphone(10, "Xr", 32000, "Apple");
-
-
-    @Test
-    public void shouldSearchBookByNameFromList() {
+    private Smartphone eleventh = new Smartphone(11, "Galaxy S10", 15000, "Samsung");
+    @BeforeEach
+    public void setUp() {
         manager.add(first);
         manager.add(second);
         manager.add(third);
@@ -38,6 +37,11 @@ class ProductManagerTest {
         manager.add(eighth);
         manager.add(ninth);
         manager.add(tenth);
+        manager.add(eleventh);
+    }
+
+    @Test
+    public void shouldSearchBookByNameFromList() {
         Product[] expected = new Product[]{first};
         Product[] actual = manager.searchBy("Мастер и Маргарита");
         assertArrayEquals(expected, actual);
@@ -45,16 +49,6 @@ class ProductManagerTest {
 
     @Test
     public void shouldNotSearchBookByNameNotFromList() {
-        manager.add(first);
-        manager.add(second);
-        manager.add(third);
-        manager.add(fourth);
-        manager.add(fifth);
-        manager.add(sixth);
-        manager.add(seventh);
-        manager.add(eighth);
-        manager.add(ninth);
-        manager.add(tenth);
         Product[] expected = new Product[]{};
         Product[] actual = manager.searchBy("Золотой теленок");
         assertArrayEquals(expected, actual);
@@ -62,48 +56,18 @@ class ProductManagerTest {
 
     @Test
     public void shouldSearchBookByAuthorFromList() {
-        manager.add(first);
-        manager.add(second);
-        manager.add(third);
-        manager.add(fourth);
-        manager.add(fifth);
-        manager.add(sixth);
-        manager.add(seventh);
-        manager.add(eighth);
-        manager.add(ninth);
-        manager.add(tenth);
         Product[] expected = new Product[]{third};
         Product[] actual = manager.searchBy("Михаил Лермонтов");
     }
 
     @Test
     public void shouldSearchBookByAuthorNotFromList() {
-        manager.add(first);
-        manager.add(second);
-        manager.add(third);
-        manager.add(fourth);
-        manager.add(fifth);
-        manager.add(sixth);
-        manager.add(seventh);
-        manager.add(eighth);
-        manager.add(ninth);
-        manager.add(tenth);
         Product[] expected = new Product[]{};
         Product[] actual = manager.searchBy("Носов");
     }
 
     @Test
     public void shouldSearchSmartphoneFromList() {
-        manager.add(first);
-        manager.add(second);
-        manager.add(third);
-        manager.add(fourth);
-        manager.add(fifth);
-        manager.add(sixth);
-        manager.add(seventh);
-        manager.add(eighth);
-        manager.add(ninth);
-        manager.add(tenth);
         Product[] expected = new Product[]{ninth};
         Product[] actual = manager.searchBy("Samsung");
         assertArrayEquals(expected, actual);
@@ -111,18 +75,16 @@ class ProductManagerTest {
 
     @Test
     public void shouldNotSearchSmartphoneNotFromList() {
-        manager.add(first);
-        manager.add(second);
-        manager.add(third);
-        manager.add(fourth);
-        manager.add(fifth);
-        manager.add(sixth);
-        manager.add(seventh);
-        manager.add(eighth);
-        manager.add(ninth);
-        manager.add(tenth);
         Product[] expected = new Product[]{};
         Product[] actual = manager.searchBy("Nan");
         assertArrayEquals(expected, actual);
     }
+//несколько товаров подходящих под один поисковый запрос
+    @Test
+    public void shouldSearchSmartphoneFromList1() {
+        Product[] expected = new Product[]{ninth, eleventh};
+        Product[] actual = manager.searchBy("Samsung");
+        assertArrayEquals(expected, actual);
+    }
+
 }
