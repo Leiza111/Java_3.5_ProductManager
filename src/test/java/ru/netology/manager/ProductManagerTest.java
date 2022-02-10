@@ -68,8 +68,8 @@ class ProductManagerTest {
 
     @Test
     public void shouldSearchSmartphoneFromList() {
-        Product[] expected = new Product[]{ninth};
-        Product[] actual = manager.searchBy("Samsung");
+        Product[] expected = new Product[]{seventh};
+        Product[] actual = manager.searchBy("Poco");
         assertArrayEquals(expected, actual);
     }
 
